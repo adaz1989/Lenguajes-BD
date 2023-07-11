@@ -41,20 +41,20 @@ public class imgInventarioTextr extends javax.swing.JFrame {
         tittle = new javax.swing.JLabel();
         footer = new javax.swing.JPanel();
         copyRight = new javax.swing.JLabel();
-        cardCliente = new Interfaz.PanelRound();
-        imgClienteBtn = new Interfaz.PanelRound();
+        cardCliente = new org.netbeans.modules.form.InvalidComponent();
+        imgClienteBtn = new org.netbeans.modules.form.InvalidComponent();
         imgClienteText = new javax.swing.JLabel();
-        clienteBtn = new Interfaz.PanelRound();
+        clienteBtn = new org.netbeans.modules.form.InvalidComponent();
         clienteText = new javax.swing.JLabel();
-        cardInventario = new Interfaz.PanelRound();
-        imgInventarioBtn = new Interfaz.PanelRound();
+        cardInventario = new org.netbeans.modules.form.InvalidComponent();
+        imgInventarioBtn = new org.netbeans.modules.form.InvalidComponent();
         imgClienteText1 = new javax.swing.JLabel();
-        inventarioBtn = new Interfaz.PanelRound();
+        inventarioBtn = new org.netbeans.modules.form.InvalidComponent();
         inventarioText = new javax.swing.JLabel();
-        cardFactura = new Interfaz.PanelRound();
-        imgFacturaBtn = new Interfaz.PanelRound();
+        cardFactura = new org.netbeans.modules.form.InvalidComponent();
+        imgFacturaBtn = new org.netbeans.modules.form.InvalidComponent();
         imgFacturaText = new javax.swing.JLabel();
-        facturaBtn = new Interfaz.PanelRound();
+        facturaBtn = new org.netbeans.modules.form.InvalidComponent();
         facturaText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -197,17 +197,6 @@ public class imgInventarioTextr extends javax.swing.JFrame {
 
         bg.add(footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 680, 1280, 50));
 
-        cardCliente.setBackground(new java.awt.Color(255, 255, 255));
-        cardCliente.setForeground(new java.awt.Color(255, 255, 255));
-        cardCliente.setRoundBottomLeft(20);
-        cardCliente.setRoundBottomRight(20);
-        cardCliente.setRoundTopLeft(20);
-        cardCliente.setRoundTopRight(20);
-
-        imgClienteBtn.setBackground(new java.awt.Color(255, 255, 255));
-        imgClienteBtn.setRoundTopLeft(20);
-        imgClienteBtn.setRoundTopRight(20);
-
         imgClienteText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imgClienteText.setIcon(new javax.swing.JLabel() {
             public javax.swing.Icon getIcon() {
@@ -237,12 +226,7 @@ public class imgInventarioTextr extends javax.swing.JFrame {
                 .addComponent(imgClienteText, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
         );
 
-        clienteBtn.setBackground(new java.awt.Color(255, 255, 255));
-        clienteBtn.setRoundBottomLeft(20);
-        clienteBtn.setRoundBottomRight(20);
-
         clienteText.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        clienteText.setForeground(new java.awt.Color(0, 0, 0));
         clienteText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         clienteText.setText("Clientes");
 
@@ -277,17 +261,6 @@ public class imgInventarioTextr extends javax.swing.JFrame {
 
         bg.add(cardCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 230, 280));
 
-        cardInventario.setBackground(new java.awt.Color(255, 255, 255));
-        cardInventario.setForeground(new java.awt.Color(255, 255, 255));
-        cardInventario.setRoundBottomLeft(20);
-        cardInventario.setRoundBottomRight(20);
-        cardInventario.setRoundTopLeft(20);
-        cardInventario.setRoundTopRight(20);
-
-        imgInventarioBtn.setBackground(new java.awt.Color(255, 255, 255));
-        imgInventarioBtn.setRoundTopLeft(20);
-        imgInventarioBtn.setRoundTopRight(20);
-
         imgClienteText1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imgClienteText1.setIcon(new javax.swing.JLabel() {
             public javax.swing.Icon getIcon() {
@@ -317,12 +290,7 @@ public class imgInventarioTextr extends javax.swing.JFrame {
                 .addComponent(imgClienteText1, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
         );
 
-        inventarioBtn.setBackground(new java.awt.Color(255, 255, 255));
-        inventarioBtn.setRoundBottomLeft(20);
-        inventarioBtn.setRoundBottomRight(20);
-
         inventarioText.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        inventarioText.setForeground(new java.awt.Color(0, 0, 0));
         inventarioText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         inventarioText.setText("Inventario");
 
@@ -357,17 +325,6 @@ public class imgInventarioTextr extends javax.swing.JFrame {
 
         bg.add(cardInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 270, 230, 280));
 
-        cardFactura.setBackground(new java.awt.Color(255, 255, 255));
-        cardFactura.setForeground(new java.awt.Color(255, 255, 255));
-        cardFactura.setRoundBottomLeft(20);
-        cardFactura.setRoundBottomRight(20);
-        cardFactura.setRoundTopLeft(20);
-        cardFactura.setRoundTopRight(20);
-
-        imgFacturaBtn.setBackground(new java.awt.Color(255, 255, 255));
-        imgFacturaBtn.setRoundTopLeft(20);
-        imgFacturaBtn.setRoundTopRight(20);
-
         imgFacturaText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imgFacturaText.setIcon(new javax.swing.JLabel() {
             public javax.swing.Icon getIcon() {
@@ -394,15 +351,10 @@ public class imgInventarioTextr extends javax.swing.JFrame {
             imgFacturaBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(imgFacturaBtnLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(imgFacturaText, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
+                .addComponent(imgFacturaText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        facturaBtn.setBackground(new java.awt.Color(255, 255, 255));
-        facturaBtn.setRoundBottomLeft(20);
-        facturaBtn.setRoundBottomRight(20);
-
         facturaText.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        facturaText.setForeground(new java.awt.Color(0, 0, 0));
         facturaText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         facturaText.setText("Facturacion");
 
@@ -526,26 +478,26 @@ public class imgInventarioTextr extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
-    private Interfaz.PanelRound cardCliente;
-    private Interfaz.PanelRound cardFactura;
-    private Interfaz.PanelRound cardInventario;
-    private Interfaz.PanelRound clienteBtn;
+    private org.netbeans.modules.form.InvalidComponent cardCliente;
+    private org.netbeans.modules.form.InvalidComponent cardFactura;
+    private org.netbeans.modules.form.InvalidComponent cardInventario;
+    private org.netbeans.modules.form.InvalidComponent clienteBtn;
     private javax.swing.JLabel clienteText;
     private javax.swing.JPanel controlBar;
     private javax.swing.JLabel copyRight;
     private javax.swing.JPanel exitButton;
     private javax.swing.JLabel exitText;
-    private Interfaz.PanelRound facturaBtn;
+    private org.netbeans.modules.form.InvalidComponent facturaBtn;
     private javax.swing.JLabel facturaText;
     private javax.swing.JPanel footer;
     private javax.swing.JPanel header;
-    private Interfaz.PanelRound imgClienteBtn;
+    private org.netbeans.modules.form.InvalidComponent imgClienteBtn;
     private javax.swing.JLabel imgClienteText;
     private javax.swing.JLabel imgClienteText1;
-    private Interfaz.PanelRound imgFacturaBtn;
+    private org.netbeans.modules.form.InvalidComponent imgFacturaBtn;
     private javax.swing.JLabel imgFacturaText;
-    private Interfaz.PanelRound imgInventarioBtn;
-    private Interfaz.PanelRound inventarioBtn;
+    private org.netbeans.modules.form.InvalidComponent imgInventarioBtn;
+    private org.netbeans.modules.form.InvalidComponent inventarioBtn;
     private javax.swing.JLabel inventarioText;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel logoutText;
