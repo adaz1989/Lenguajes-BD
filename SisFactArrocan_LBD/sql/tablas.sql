@@ -1,16 +1,16 @@
 
 
 -- ========================================================
--- ===============   Tablas Principales ===========
+-- ===============   Tablas Principales ==================
 -- ========================================================
 
 -- ___________________ Clientes ___________________________
 
 CREATE TABLE Clientes (
-  IdCliente int PRIMARY KEY NOT NULL,
-  Cedula int NOT NULL,
-  Nombre VARCHAR2(20) NOT NULL,
-  Apellidos VARCHAR2(40) NOT NULL
+  id_cliente int PRIMARY KEY NOT NULL,
+  cedula int NOT NULL,
+  nombre VARCHAR2(20) NOT NULL,
+  apellido VARCHAR2(40) NOT NULL
 );
 
 CREATE SEQUENCE Seq_Clientes
@@ -21,19 +21,19 @@ CREATE OR REPLACE TRIGGER Trg_Clientes
   BEFORE INSERT ON Clientes
   FOR EACH ROW
 BEGIN
-  SELECT Seq_Clientes.NEXTVAL INTO :NEW.IdCliente FROM DUAL;
+  SELECT Seq_Clientes.NEXTVAL INTO :NEW.id_cliente FROM DUAL;
 END;
 /
 
 -- Registro Prueba
-INSERT INTO Clientes (Cedula, Nombre, Apellidos)
+INSERT INTO Clientes (cedula, nombre, apellido)
 VALUES (3235236432, 'Maria', 'Torres');
 
 -- ___________________ Departamentos ___________________________
 
 CREATE TABLE Departamentos (
-  IdDepartamento int PRIMARY KEY NOT NULL,
-  NombreDepartamento varchar(40) NOT NULL
+  id_departamento int PRIMARY KEY NOT NULL,
+  nombre_departamento varchar(40) NOT NULL
 );
 
 CREATE SEQUENCE Seq_Departamentos
@@ -44,21 +44,21 @@ CREATE OR REPLACE TRIGGER Trg_Departamentos
   BEFORE INSERT ON Departamentos
   FOR EACH ROW
 BEGIN
-  SELECT Seq_Departamentos.NEXTVAL INTO :NEW.IdDepartamento FROM DUAL;
+  SELECT Seq_Departamentos.NEXTVAL INTO :NEW.id_departamento FROM DUAL;
 END;
 /
 
 -- Registro Prueba
-INSERT INTO Departamentos (NombreDepartamento)
+INSERT INTO Departamentos (nombre_departamento)
 VALUES ('Recursos Humanos');
 
 -- ___________________ Puestos ___________________________
 
 CREATE TABLE Puestos (
-  IdPuesto int PRIMARY KEY NOT NULL,
-  IdDepartamento int NOT NULL, -- FK
-  Nombre varchar(40) NOT NULL,
-  FOREIGN KEY (IdDepartamento) REFERENCES Departamentos(IdDepartamento)
+  id_puesto int PRIMARY KEY NOT NULL,
+  id_departamento int NOT NULL, -- FK
+  nombre varchar(40) NOT NULL,
+  FOREIGN KEY (id_departamento) REFERENCES Departamentos(id_departamento)
 );
 
 CREATE SEQUENCE Seq_Puestos
@@ -69,23 +69,23 @@ CREATE OR REPLACE TRIGGER Trg_Puestos
   BEFORE INSERT ON Puestos
   FOR EACH ROW
 BEGIN
-  SELECT Seq_Puestos.NEXTVAL INTO :NEW.IdPuesto FROM DUAL;
+  SELECT Seq_Puestos.NEXTVAL INTO :NEW.id_puesto FROM DUAL;
 END;
 /
 
 -- Registro Prueba
-INSERT INTO Puestos (IdDepartamento, Nombre)
+INSERT INTO Puestos (id_departamento, nombre)
 VALUES ('1', 'Director RH');
 
 -- ___________________ Colaboradores ___________________________
 
 CREATE TABLE Colaboradores (
-  IdColab int PRIMARY KEY NOT NULL,
-  IdPuesto int NOT NULL, -- FK
-  Cedula int NOT NULL,
-  Nombre varchar(20) NOT NULL,
-  Apellidos varchar(40) NOT NULL,
-  FOREIGN KEY (IdPuesto) REFERENCES Puestos(IdPuesto)
+  id_colab int PRIMARY KEY NOT NULL,
+  id_puesto int NOT NULL, -- FK
+  cedula int NOT NULL,
+  nombre varchar(20) NOT NULL,
+  apellido varchar(40) NOT NULL,
+  FOREIGN KEY (id_puesto) REFERENCES Puestos(id_puesto)
 );
 
 CREATE SEQUENCE Seq_Colaboradores
@@ -96,19 +96,19 @@ CREATE OR REPLACE TRIGGER Trg_Colaboradores
   BEFORE INSERT ON Colaboradores
   FOR EACH ROW
 BEGIN
-  SELECT Seq_Colaboradores.NEXTVAL INTO :NEW.IdColab FROM DUAL;
+  SELECT Seq_Colaboradores.NEXTVAL INTO :NEW.id_colab FROM DUAL;
 END;
 /
 
 -- Registro Prueba
-INSERT INTO Colaboradores (IdPuesto,Cedula,Nombre,Apellidos)
+INSERT INTO Colaboradores (id_puesto,cedula,nombre,apellido)
 VALUES ('1', 32555, 'Adrian', 'Alvarado Zumbado');
 -- ___________________ Proveedores ___________________________
 
 CREATE TABLE Proveedores (
-  IdProveedor int PRIMARY KEY NOT NULL,
-  Empresa varchar(20) NOT NULL,
-  CostoEnvio int
+  id_proveedores int PRIMARY KEY NOT NULL,
+  empresa varchar(20) NOT NULL,
+  costo_envio int
 );
 
 CREATE SEQUENCE Seq_Proveedores
@@ -119,47 +119,47 @@ CREATE OR REPLACE TRIGGER Trg_Proveedores
   BEFORE INSERT ON Proveedores
   FOR EACH ROW
 BEGIN
-  SELECT Seq_Proveedores.NEXTVAL INTO :NEW.IdProveedor FROM DUAL;
+  SELECT Seq_Proveedores.NEXTVAL INTO :NEW.id_proveedores FROM DUAL;
 END;
 /
 
 -- Registro Prueba
-INSERT INTO Proveedores (Empresa, CostoEnvio)
-VALUES ('Una Empresa', 5000);
+INSERT INTO Proveedores (empresa, costo_envio)
+VALUES ('Una empresa', 5000);
 
--- ___________________ MetodosPago ___________________________
+-- ___________________ Metodos_Pago ___________________________
 
-CREATE TABLE MetodosPago (
-  IdMetodoPago int PRIMARY KEY NOT NULL,
-  MetodoPago varchar(10) NOT NULL
+CREATE TABLE Metodos_Pago (
+  id_metodo_pago int PRIMARY KEY NOT NULL,
+  metodo_pago varchar(10) NOT NULL
 );
 
-CREATE SEQUENCE Seq_MetodosPago
+CREATE SEQUENCE Seq_Metodos_Pago
   START WITH 1
   INCREMENT BY 1;
   
-CREATE OR REPLACE TRIGGER Trg_MetodosPago
-  BEFORE INSERT ON MetodosPago
+CREATE OR REPLACE TRIGGER Trg_Metodos_Pago
+  BEFORE INSERT ON Metodos_Pago
   FOR EACH ROW
 BEGIN
-  SELECT Seq_MetodosPago.NEXTVAL INTO :NEW.IdMetodoPago FROM DUAL;
+  SELECT Seq_Metodos_Pago.NEXTVAL INTO :NEW.id_metodo_pago FROM DUAL;
 END;
 /
 
 -- Registro 
-INSERT INTO MetodosPago (MetodoPago)
+INSERT INTO Metodos_Pago (metodo_pago)
 VALUES ('Efectivo');
-INSERT INTO MetodosPago (MetodoPago)
+INSERT INTO Metodos_Pago (metodo_pago)
 VALUES ('Tarjeta');
-INSERT INTO MetodosPago (MetodoPago)
+INSERT INTO Metodos_Pago (metodo_pago)
 VALUES ('SINPE');
 
 
 -- ___________________ Provincias ___________________________
 
 CREATE TABLE Provincias (
-  IdProvincia int PRIMARY KEY NOT NULL,
-  Provincia varchar(20) NOT NULL
+  id_provincia int PRIMARY KEY NOT NULL,
+  provincia varchar(20) NOT NULL
 );
 
 CREATE SEQUENCE Seq_Provincias
@@ -170,33 +170,33 @@ CREATE OR REPLACE TRIGGER Trg_Provincias
   BEFORE INSERT ON Provincias
   FOR EACH ROW
 BEGIN
-  SELECT Seq_Provincias.NEXTVAL INTO :NEW.IdProvincia FROM DUAL;
+  SELECT Seq_Provincias.NEXTVAL INTO :NEW.id_provincia FROM DUAL;
 END;
 /
 
 -- Registro
-INSERT INTO Provincias (Provincia)
+INSERT INTO Provincias (provincia)
 VALUES ('San José');
-INSERT INTO Provincias (Provincia)
+INSERT INTO Provincias (provincia)
 VALUES ('Alajuela');
-INSERT INTO Provincias (Provincia)
+INSERT INTO Provincias (provincia)
 VALUES ('Heredia');
-INSERT INTO Provincias (Provincia)
+INSERT INTO Provincias (provincia)
 VALUES ('Cartago');
-INSERT INTO Provincias (Provincia)
+INSERT INTO Provincias (provincia)
 VALUES ('Puntarenas');
-INSERT INTO Provincias (Provincia)
+INSERT INTO Provincias (provincia)
 VALUES ('Guanacaste');
-INSERT INTO Provincias (Provincia)
+INSERT INTO Provincias (provincia)
 VALUES ('Limón');
 
 -- ___________________ Cantones ___________________________
 
 CREATE TABLE Cantones (
-  IdCanton int PRIMARY KEY NOT NULL,
-  IdProvincia int NOT NULL, -- FK
-  Canton varchar(20) NOT NULL,
-  FOREIGN KEY (IdProvincia) REFERENCES Provincias(IdProvincia)
+  id_canton int PRIMARY KEY NOT NULL,
+  id_provincia int NOT NULL, -- FK
+  canton varchar(20) NOT NULL,
+  FOREIGN KEY (id_provincia) REFERENCES Provincias(id_provincia)
 );
 
 CREATE SEQUENCE Seq_Cantones
@@ -207,21 +207,21 @@ CREATE OR REPLACE TRIGGER Trg_Cantones
   BEFORE INSERT ON Cantones
   FOR EACH ROW
 BEGIN
-  SELECT Seq_Cantones.NEXTVAL INTO :NEW.IdCanton FROM DUAL;
+  SELECT Seq_Cantones.NEXTVAL INTO :NEW.id_canton FROM DUAL;
 END;
 /
 
 -- Registro Prueba
-INSERT INTO Cantones (IdProvincia, Canton)
+INSERT INTO Cantones (id_provincia, canton)
 VALUES (1, 'San José');
 
 -- ___________________ Distritos ___________________________
 
 CREATE TABLE Distritos (
-  IdDistrito int PRIMARY KEY NOT NULL,
-  IdCanton int NOT NULL, -- FK
-  Distrito varchar(20),
-  FOREIGN KEY (IdCanton) REFERENCES Cantones(IdCanton)
+  id_distrito int PRIMARY KEY NOT NULL,
+  id_canton int NOT NULL, -- FK
+  distrito varchar(20),
+  FOREIGN KEY (id_canton) REFERENCES Cantones(id_canton)
 );
 
 CREATE SEQUENCE Seq_Distritos
@@ -232,26 +232,26 @@ CREATE OR REPLACE TRIGGER Trg_Distritos
   BEFORE INSERT ON Distritos
   FOR EACH ROW
 BEGIN
-  SELECT Seq_Distritos.NEXTVAL INTO :NEW.IdDistrito FROM DUAL;
+  SELECT Seq_Distritos.NEXTVAL INTO :NEW.id_distrito FROM DUAL;
 END;
 /
 
 -- Registro Prueba
-INSERT INTO Distritos (IdCanton, Distrito)
+INSERT INTO Distritos (id_canton, distrito)
 VALUES (1, 'Carmen');
 
 -- ___________________ Direcciones ___________________________
 
 
 CREATE TABLE Direcciones (
-  IdDireccion int PRIMARY KEY NOT NULL,
-  IdProvincia int NOT NULL, -- FK
-  IdCanton int NOT NULL, -- FK
-  IdDistrito int NOT NULL, -- FK
-  Detalle varchar(100),
-  FOREIGN KEY (IdProvincia) REFERENCES Provincias(IdProvincia),
-  FOREIGN KEY (IdCanton) REFERENCES Cantones(IdCanton),
-  FOREIGN KEY (IdDistrito) REFERENCES Distritos(IdDistrito)
+  id_direccion int PRIMARY KEY NOT NULL,
+  id_provincia int NOT NULL, -- FK
+  id_canton int NOT NULL, -- FK
+  id_distrito int NOT NULL, -- FK
+  detalle varchar(100),
+  FOREIGN KEY (id_provincia) REFERENCES Provincias(id_provincia),
+  FOREIGN KEY (id_canton) REFERENCES Cantones(id_canton),
+  FOREIGN KEY (id_distrito) REFERENCES Distritos(id_distrito)
 );
 
 CREATE SEQUENCE Seq_Direcciones
@@ -262,19 +262,19 @@ CREATE OR REPLACE TRIGGER Trg_Direcciones
   BEFORE INSERT ON Direcciones
   FOR EACH ROW
 BEGIN
-  SELECT Seq_Direcciones.NEXTVAL INTO :NEW.IdDireccion FROM DUAL;
+  SELECT Seq_Direcciones.NEXTVAL INTO :NEW.id_direccion FROM DUAL;
 END;
 /
 
 -- Registro Prueba
-INSERT INTO Direcciones (IdProvincia, IdCanton, IdDistrito, Detalle)
+INSERT INTO Direcciones (id_provincia, id_canton, id_distrito, detalle)
 VALUES (1, 1, 1, 'Esta es una direccion de prueba');
 
 -- ___________________ Correos ___________________________
 
 CREATE TABLE Correos (
-  IdCorreo int PRIMARY KEY NOT NULL,
-  Correo varchar(50) NOT NULL
+  id_correo int PRIMARY KEY NOT NULL,
+  correo varchar(50) NOT NULL
 );
 
 CREATE SEQUENCE Seq_Correos
@@ -285,46 +285,46 @@ CREATE OR REPLACE TRIGGER Trg_Correos
   BEFORE INSERT ON Correos
   FOR EACH ROW
 BEGIN
-  SELECT Seq_Correos.NEXTVAL INTO :NEW.IdCorreo FROM DUAL;
+  SELECT Seq_Correos.NEXTVAL INTO :NEW.id_correo FROM DUAL;
 END;
 /
 
 -- Registro Prueba
-INSERT INTO Correos (Correo)
+INSERT INTO Correos (correo)
 VALUES ('prueba@correo.com');
 
--- ___________________ Telefonos ___________________________
+-- ___________________ telefonos ___________________________
 
-CREATE TABLE Telefonos (
-  IdTelefono int PRIMARY KEY NOT NULL,
-  Telefono int NOT NULL
+CREATE TABLE telefonos (
+  id_telefono int PRIMARY KEY NOT NULL,
+  telefono int NOT NULL
 );
 
-CREATE SEQUENCE Seq_Telefonos
+CREATE SEQUENCE Seq_telefonos
   START WITH 1
   INCREMENT BY 1;
   
-CREATE OR REPLACE TRIGGER Trg_Telefonos
-  BEFORE INSERT ON Telefonos
+CREATE OR REPLACE TRIGGER Trg_telefonos
+  BEFORE INSERT ON telefonos
   FOR EACH ROW
 BEGIN
-  SELECT Seq_Telefonos.NEXTVAL INTO :NEW.IdTelefono FROM DUAL;
+  SELECT Seq_telefonos.NEXTVAL INTO :NEW.id_telefono FROM DUAL;
 END;
 /
 
 -- Registro Prueba
-INSERT INTO Telefonos (Telefono)
+INSERT INTO telefonos (telefono)
 VALUES (71048756);
 
 -- ___________________ Productos ___________________________
 
 CREATE TABLE Productos (
-  IdProducto int PRIMARY KEY NOT NULL,
-  Nombre varchar(20) NOT NULL,
-  Marca varchar(20) NOT NULL,
-  Descripcion varchar(40) NOT NULL,
-  PrecioVenta int NOT NULL,
-  Stock int NOT NULL
+  id_producto int PRIMARY KEY NOT NULL,
+  nombre varchar(20) NOT NULL,
+  marca varchar(20) NOT NULL,
+  descripcion varchar(40) NOT NULL,
+  precio_venta int NOT NULL,
+  stock int NOT NULL
 );
 
 CREATE SEQUENCE Seq_Productos
@@ -335,76 +335,76 @@ CREATE OR REPLACE TRIGGER Trg_Productos
   BEFORE INSERT ON Productos
   FOR EACH ROW
 BEGIN
-  SELECT Seq_Productos.NEXTVAL INTO :NEW.IdProducto FROM DUAL;
+  SELECT Seq_Productos.NEXTVAL INTO :NEW.id_producto FROM DUAL;
 END;
 /
 
 -- Registro Prueba
-INSERT INTO Productos (Nombre, Marca, Descripcion, PrecioVenta, Stock)
-VALUES ('Producto1', 'MarcaProducto', 'Descripcion', 2500, 5);
+INSERT INTO Productos (nombre, marca, descripcion, precio_venta, stock)
+VALUES ('Producto1', 'marcaProducto', 'descripcion', 2500, 5);
 
 -- ___________________ FacturaVentas ___________________________
 
-CREATE TABLE FacturasVentas (
-  IdFacturaV int PRIMARY KEY NOT NULL,
-  IdCliente int NOT NULL, -- FK
-  IdColab int NOT NULL, -- FK
-  IdMetodoPago int NOT NULL, -- FK
-  Fecha date DEFAULT SYSDATE NOT NULL,
-  Monto decimal(10, 1) NOT NULL,
-  Descuento decimal(5, 2) NOT NULL,
-  FOREIGN KEY (IdCliente) REFERENCES Clientes(IdCliente),
-  FOREIGN KEY (IdColab) REFERENCES Colaboradores(IdColab),
-  FOREIGN KEY (IdMetodoPago) REFERENCES MetodosPago(IdMetodoPago)
+CREATE TABLE Facturas_Compras (
+  id_factura_venta int PRIMARY KEY NOT NULL,
+  id_cliente int NOT NULL, -- FK
+  id_colab int NOT NULL, -- FK
+  id_metodo_pago int NOT NULL, -- FK
+  fecha date DEFAULT SYSDATE NOT NULL,
+  monto decimal(10, 1) NOT NULL,
+  descuento decimal(5, 2) NOT NULL,
+  FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente),
+  FOREIGN KEY (id_colab) REFERENCES Colaboradores(id_colab),
+  FOREIGN KEY (id_metodo_pago) REFERENCES Metodos_Pago(id_metodo_pago)
 );
 
-CREATE SEQUENCE Seq_FacturasVentas
+CREATE SEQUENCE Seq_Facturas_Compras
   START WITH 1
   INCREMENT BY 1;
   
-CREATE OR REPLACE TRIGGER Trg_FacturasVentas
-  BEFORE INSERT ON FacturasVentas
+CREATE OR REPLACE TRIGGER Trg_Facturas_Compras
+  BEFORE INSERT ON Facturas_Compras
   FOR EACH ROW
 BEGIN
-  SELECT Seq_FacturasVentas.NEXTVAL INTO :NEW.IdFacturaV FROM DUAL;
+  SELECT Seq_Facturas_Compras.NEXTVAL INTO :NEW.id_factura_venta FROM DUAL;
 END;
 /
 
--- Insertar un registro en la tabla FacturasVentas
-INSERT INTO FacturasVentas (IdCliente, IdColab, IdMetodoPago, Monto, Descuento)
+-- Insertar un registro en la tabla Facturas_Compras
+INSERT INTO Facturas_Compras (id_cliente, id_colab, id_metodo_pago, monto, descuento)
 VALUES (1, 1, 1, 100.5, 0.05);
 
--- ___________________ FacturaCompras _____________________
+-- ___________________ Facturas_Compras _____________________
 
-CREATE TABLE FacturaCompras (
-  IdFacturaC int PRIMARY KEY NOT NULL,
-  IdColab int NOT NULL, -- FK
-  IdProveedor int NOT NULL, -- FK
-  IdMetodoPago int NOT NULL, -- FK
-  Fecha date DEFAULT SYSDATE NOT NULL,
-  Monto decimal(10, 1) NOT NULL,
-  Descuento decimal(5, 2) NOT NULL,
-  FOREIGN KEY (IdColab) REFERENCES Colaboradores(IdColab),
-  FOREIGN KEY (IdProveedor) REFERENCES Proveedores(IdProveedor),
-  FOREIGN KEY (IdMetodoPago) REFERENCES MetodosPago(IdMetodoPago)
+CREATE TABLE Facturas_Compras (
+  id_factura_compra int PRIMARY KEY NOT NULL,
+  id_colab int NOT NULL, -- FK
+  id_proveedores int NOT NULL, -- FK
+  id_metodo_pago int NOT NULL, -- FK
+  fecha date DEFAULT SYSDATE NOT NULL,
+  monto decimal(10, 1) NOT NULL,
+  descuento decimal(5, 2) NOT NULL,
+  FOREIGN KEY (id_colab) REFERENCES Colaboradores(id_colab),
+  FOREIGN KEY (id_proveedores) REFERENCES Proveedores(id_proveedores),
+  FOREIGN KEY (id_metodo_pago) REFERENCES Metodos_Pago(id_metodo_pago)
 );
 
-CREATE SEQUENCE Seq_FacturaCompras
+CREATE SEQUENCE Seq_Facturas_Compras
   START WITH 1
   INCREMENT BY 1;
   
-CREATE OR REPLACE TRIGGER Trg_FacturaCompras
-  BEFORE INSERT ON FacturaCompras
+CREATE OR REPLACE TRIGGER Trg_Facturas_Compras
+  BEFORE INSERT ON Facturas_Compras
   FOR EACH ROW
 BEGIN
-  SELECT Seq_FacturaCompras.NEXTVAL INTO :NEW.IdFacturaC FROM DUAL;
+  SELECT Seq_Facturas_Compras.NEXTVAL INTO :NEW.id_factura_compra FROM DUAL;
 END;
 /
 
--- Insertar un registro en la tabla FacturaCompras
-INSERT INTO FacturaCompras (IdColab, IdProveedor, IdMetodoPago, Monto, Descuento)
+-- Insertar un registro en la tabla Facturas_Compras
+INSERT INTO Facturas_Compras (id_colab, id_proveedores, id_metodo_pago, monto, descuento)
 VALUES (1, 1, 1, 100.5, 0.05);
-select * from facturacompras;
+select * from Facturas_Compras;
 
 -- ================================================================
 -- ======================   Tablas de Apoyo =======================
@@ -413,114 +413,114 @@ select * from facturacompras;
 -- ___________________ Direcciones_Clientes ___________________________
 
 CREATE TABLE Direcciones_Clientes (
-  IdCliente int,
-  IdDireccion int,
-  FOREIGN KEY (IdCliente) REFERENCES Clientes(IdCliente),
-  FOREIGN KEY (IdDireccion) REFERENCES Direcciones(IdDireccion)
+  id_cliente int,
+  id_direccion int,
+  FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente),
+  FOREIGN KEY (id_direccion) REFERENCES Direcciones(id_direccion)
 );
 
 -- ___________________ Correos_Clientes ___________________________
 
 CREATE TABLE Correos_Clientes (
-  IdCliente int,
-  IdCorreo int,
-  FOREIGN KEY (IdCliente) REFERENCES Clientes(IdCliente),
-  FOREIGN KEY (IdCorreo) REFERENCES Correos(IdCorreo)
+  id_cliente int,
+  id_correo int,
+  FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente),
+  FOREIGN KEY (id_correo) REFERENCES Correos(id_correo)
 );
 
 -- ___________________ Telefonos_Clientes ___________________________
 
 CREATE TABLE Telefonos_Clientes (
-  IdCliente int,
-  IdTelefono int,
-  FOREIGN KEY (IdCliente) REFERENCES Clientes(IdCliente),
-  FOREIGN KEY (IdTelefono) REFERENCES Telefonos(IdTelefono)
+  id_cliente int,
+  id_telefono int,
+  FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente),
+  FOREIGN KEY (id_telefono) REFERENCES telefonos(id_telefono)
 );
 
 -- ___________________ Direcciones_Colaboradores ___________________________
 
 CREATE TABLE Direcciones_Colaboradores (
-  IdColab int,
-  IdDireccion int,
-  FOREIGN KEY (IdColab) REFERENCES Colaboradores(IdColab),
-  FOREIGN KEY (IdDireccion) REFERENCES Direcciones(IdDireccion)
+  id_colab int,
+  id_direccion int,
+  FOREIGN KEY (id_colab) REFERENCES Colaboradores(id_colab),
+  FOREIGN KEY (id_direccion) REFERENCES Direcciones(id_direccion)
 );
 
 -- ___________________ Correos_Colaboradores ___________________________
 
 CREATE TABLE Correos_Colaboradores (
-  IdColab int,
-  IdCorreo int,
-  FOREIGN KEY (IdColab) REFERENCES Colaboradores(IdColab),
-  FOREIGN KEY (IdCorreo) REFERENCES Correos(IdCorreo)
+  id_colab int,
+  id_correo int,
+  FOREIGN KEY (id_colab) REFERENCES Colaboradores(id_colab),
+  FOREIGN KEY (id_correo) REFERENCES Correos(id_correo)
 );
 
 -- ___________________ Telefonos_Colaboradores ___________________________
 
 CREATE TABLE Telefonos_Colaboradores (
-  IdColab int,
-  IdTelefono int,
-  FOREIGN KEY (IdColab) REFERENCES Colaboradores(IdColab),
-  FOREIGN KEY (IdTelefono) REFERENCES Telefonos(IdTelefono)
+  id_colab int,
+  id_telefono int,
+  FOREIGN KEY (id_colab) REFERENCES Colaboradores(id_colab),
+  FOREIGN KEY (id_telefono) REFERENCES telefonos(id_telefono)
 );
 
 
 -- ___________________ Direcciones_Proveedores ___________________________
 
 CREATE TABLE Direcciones_Proveedores (
-  IdProveedor int,
-  IdDireccion int,
-  FOREIGN KEY (IdProveedor) REFERENCES Proveedores(IdProveedor),
-  FOREIGN KEY (IdDireccion) REFERENCES Direcciones(IdDireccion)
+  id_proveedores int,
+  id_direccion int,
+  FOREIGN KEY (id_proveedores) REFERENCES Proveedores(id_proveedores),
+  FOREIGN KEY (id_direccion) REFERENCES Direcciones(id_direccion)
 );
 
 -- ___________________ Correos_Proveedores ___________________________
 CREATE TABLE Correos_Proveedores (
-  IdProveedor int,
-  IdCorreo int,
-  FOREIGN KEY (IdProveedor) REFERENCES Proveedores(IdProveedor),
-  FOREIGN KEY (IdCorreo) REFERENCES Correos(IdCorreo)
+  id_proveedores int,
+  id_correo int,
+  FOREIGN KEY (id_proveedores) REFERENCES Proveedores(id_proveedores),
+  FOREIGN KEY (id_correo) REFERENCES Correos(id_correo)
 );
 
 -- ___________________ Telefonos_Proveedores ___________________________
 
 CREATE TABLE Telefonos_Proveedores (
-  IdProveedor int,
-  IdTelefono int,
-  FOREIGN KEY (IdProveedor) REFERENCES Proveedores(IdProveedor),
-  FOREIGN KEY (IdTelefono) REFERENCES Telefonos(IdTelefono)
+  id_proveedores int,
+  id_telefono int,
+  FOREIGN KEY (id_proveedores) REFERENCES Proveedores(id_proveedores),
+  FOREIGN KEY (id_telefono) REFERENCES telefonos(id_telefono)
 );
 
 -- ___________________ Productos_Proveedores ___________________________
 
 CREATE TABLE Productos_Proveedor (
-  IdProveedor int,
-  IdProducto int,
-  PrecioCompra int,
-  FOREIGN KEY (IdProveedor) REFERENCES Proveedores(IdProveedor),
-  FOREIGN KEY (IdProducto) REFERENCES Productos(IdProducto)
+  id_proveedores int,
+  id_producto int,
+  precio_compra int,
+  FOREIGN KEY (id_proveedores) REFERENCES Proveedores(id_proveedores),
+  FOREIGN KEY (id_producto) REFERENCES Productos(id_producto)
 );
 
--- ___________________ Factura_ProductosVentas _________________________
+-- ___________________ Factura_Productos_Ventas _________________________
 
-CREATE TABLE Factura_ProductosVentas (
-  IdFacturaV int,
-  IdProducto int,
-  Cantidad int,
-  Precio int,
-  FOREIGN KEY (IdFacturaV) REFERENCES FacturasVentas(IdFacturaV),
-  FOREIGN KEY (IdProducto) REFERENCES Productos(IdProducto)
+CREATE TABLE Factura_Productos_Ventas (
+  id_factura_venta int,
+  id_producto int,
+  cantidad int,
+  precio int,
+  FOREIGN KEY (id_factura_venta) REFERENCES Facturas_Compras(id_factura_venta),
+  FOREIGN KEY (id_producto) REFERENCES Productos(id_producto)
 );
 
--- ___________________ Factura_ProductosCompras _______________________
+-- ___________________ Factura_Productos_Compras _______________________
 
-CREATE TABLE Factura_ProductosCompras (
-  IdFacturaC int,
-  IdProducto int,
-  Cantidad int,
-  Precio int,
-  FOREIGN KEY (IdFacturaC) REFERENCES FacturaCompras(IdFacturaC),
-  FOREIGN KEY (IdProducto) REFERENCES Productos(IdProducto)
+CREATE TABLE Factura_Productos_Compras (
+  id_factura_compra int,
+  id_producto int,
+  cantidad int,
+  precio int,
+  FOREIGN KEY (id_factura_compra) REFERENCES Facturas_Compras(id_factura_compra),
+  FOREIGN KEY (id_producto) REFERENCES Productos(id_producto)
 );
 
 
